@@ -1,35 +1,33 @@
 let canvasWidth = window.innerWidth;
 let canvasHeight = window.innerHeight;
 
-// in p5.js, the function runs on page load:
 function setup() {
+  // sets up the canvas:
   createCanvas(canvasWidth, canvasHeight);
 
-  // invoke any drawing functions inside of setup.
-  // functions should all go between "createCanvas()" and "drawGrid()"
-  draw5Circles();
-  // draw5RedSquares();
+  // code invoking the function you just wrote:
+  drawNShapesDirectionFlexible(30, 30, 335, 0, "square", "column");
+  drawNShapesDirectionFlexible(4, 100, 120, 200, "circle", "row");
+  drawNShapesDirectionFlexible(8, 50, 725, 425, "circle", "row");
+
+  // draws grid at the end:
   drawGrid(canvasWidth, canvasHeight);
 }
 
-// my first function
-function draw5Circles() {
-  noFill();
-  // fill('red');
-  let x = 100;
-  let y = 200;
-  let d = 50;
-  while (y <= 400) {
-    circle(x, y, d); // centerX, centerY, radius
-    y += 50;
-  }
-}
+function drawNShapesDirectionFlexible(n, size, x, y, shape, direction) {
+  fill("lightblue");
+  for (let i = 0; i < n; i++) {
+    if (shape === "circle") {
+      circle(x, y, size);
+    } else if (shape === "square") {
+      fill("lightgreen");
+      square(x, y, size);
+    }
 
-function draw5RedSquares() {
-  fill("red");
-  square(320, 200, 50); // topLeftX, topLeftY, width
-  square(320, 250, 50);
-  square(320, 300, 50);
-  square(320, 350, 50);
-  square(320, 400, 50);
+    if (direction === "vertical") {
+      y += size;
+    } else if (direction === "horizontal") {
+      x += size;
+    }
+  }
 }
