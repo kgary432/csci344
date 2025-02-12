@@ -4,8 +4,8 @@
 /* Global Styles */
 body {
   font-family: "Poppins", sans-serif;
-  background-color: #f8f9fa;
-  color: #333;
+  background-color: #e8e8e6;
+  color: #1f4529;
   margin: 0;
   padding: 0;
 }
@@ -39,6 +39,13 @@ header {
 
 .button:hover {
   background-color: #e63946;
+}
+a:link {
+  color: #0075a2; /* Normal unvisited link */
+}
+
+a:visited {
+  color: #8a4f7d; /* Visited link */
 }
 
 /* Footer */
