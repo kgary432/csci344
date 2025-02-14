@@ -1,0 +1,40 @@
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.grid-container {
+  height: 100vh;
+  /* you will add addition rules for the container here  */
+  display: grid;
+  grid-template: repeat(5, 1fr) / repeat(5, 1fr);
+}
+
+/* create your child rules here:  */
+div {
+  background-color: rgb(192, 167, 197);
+  border: solid rgb(105, 27, 124) 2px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.item-1 {
+  grid-area: 1/1/1/4;
+}
+
+.item-2 {
+  grid-area: 2/3/2/6;
+}
+
+.item-3 {
+  grid-area: 3/1/3/4;
+}
+
+.item-4 {
+  grid-area: 4/3/4/6;
+}
+
+.item-5 {
+  grid-area: 5/1/5/4;
+}
