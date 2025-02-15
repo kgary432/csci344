@@ -1,46 +1,89 @@
+@import url("https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap");
+
 body {
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-family: sans-serif;
   background-color: lightgray;
-  height: 90vh;
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 10% 80%;
+  margin: 0;
 }
 
 main {
   background-color: rgb(179, 177, 177);
   display: grid;
   grid-template-columns: 2fr 1fr;
-  grid-template-rows: 30px, auto;
-  height: 100ch;
+  grid-template-rows: 50vh, auto;
   width: 100%;
-  margin-top: 8ch;
+  height: 200vh;
 }
 
-div,
-section {
-  border: 2px solid rgb(98, 98, 98);
+header {
+  background-color: lightgray;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: auto;
+  width: auto;
+  position: sticky;
+  padding-left: 2%;
+  padding-right: 2%;
 }
 
-#navbar {
-  height: 100ch;
-  width: 100%;
-  position: fixed;
+nav {
+  width: fit-content;
+  display: flex;
+  justify-content: space-between;
+  /* padding-right: 30px; */
+}
+nav a {
+  padding: 20px;
+  /* padding-left: 10%; */
+}
+
+a,
+a:visited,
+a:hover,
+a:focus {
+  color: black;
+  text-decoration: none;
 }
 
 #content {
+  border: black 1px solid;
+  padding-left: 10%;
 }
 
 #suggested {
   grid-template-columns: 80px auto 80px;
+  border: black 1px solid;
+  margin: 2%;
 }
 
 #stories {
   height: 15vh;
+  border: black 1px solid;
+  display: flex;
+  padding: 1%;
+  margin: 1%;
+  align-items: center;
 }
 
-#post {
+.story_post {
+  border: 1px solid darkcyan;
+  height: fit-content;
+  width: fit-content;
+
+  margin: 0.5%;
 }
+
+#posts {
+  border: 1px solid black;
+  margin: 1%;
+}
+
+.post {
+  border: 1px black solid;
+  margin: 1%;
+}
+
 /* Mobile Version */
 @media (max-width: 768px) {
   body {
