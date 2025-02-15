@@ -4,13 +4,18 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    />
   </head>
   <body>
     <header id="navbar">
-      <h3>Photo App</h3>
+      <h2>Photo App</h2>
       <nav>
-        <p><a href="#">User Name</a></p>
-        <p><a href="#">Sign out</a></p>
+        <p><a href="#">username</a></p>
+        <p><a href="#" style="color: blue">Sign out</a></p>
+        <!--"cheating" with some casual inline styling (my fave)-->
       </nav>
     </header>
     <main>
@@ -18,98 +23,212 @@
         <div id="stories">
           <!-- <p>Stories</p> -->
           <div class="story_post">
-            <img src="pfp1.jpeg" alt="pic of friend" />
+            <img src="pfp1.jpeg" alt="pic of friend" class="pfp" />
             <p>friend 1</p>
           </div>
           <div class="story_post">
-            <img src="pfp2.jpeg" alt="pic of friend" />
+            <img src="pfp2.jpeg" alt="pic of friend" class="pfp" />
             <p>friend 2</p>
           </div>
           <div class="story_post">
-            <img src="pfp3.jpeg" alt="pic of friend" />
+            <img src="pfp3.jpeg" alt="pic of friend" class="pfp" />
             <p>friend 3</p>
           </div>
           <div class="story_post">
-            <img src="pfp4.jpeg" alt="pic of friend" />
+            <img src="pfp4.jpeg" alt="pic of friend" class="pfp" />
             <p>friend 4</p>
+          </div>
           </div>
         </div>
         <div id="posts">
           <!-- <p>Posts</p> -->
           <div class="post">
             <div class="post_header">
-              <strong>[username]</strong>
-              <p>icon</p>
+              <h3>[username]</h3>
+              <h3>•••</h3>
             </div>
             <img src="butterflycat.jpeg" alt="cat with butterfly wings" />
             <div class="post_description">
               <div class="post_icons">
-                <p>[]</p>
-                <p>[]</p>
-                <p>[]</p>
-                <p>[]</p>
+                <p>
+                  <i class="fa-regular fa-heart"></i>
+                  <i class="fa-regular fa-comment"></i>
+                  <i class="fa-regular fa-paper-plane"></i>
+                </p>
+                <p><i class="fa-regular fa-bookmark"></i></p>
               </div>
               <strong> # likes</strong>
               <div class="comments">
-                <p>...</p>
+                <p>
+                  <strong>friend 1</strong> lorem ipsum et dolor etc. etc. etc.
+                  words comment one
+                </p>
+                <p>
+                  <strong>friend 5</strong> lorem ipsum et dolor etc. etc. etc.
+                  words comment two
+                </p>
+                <p>
+                  <strong>friend 3</strong> lorem ipsum et dolor etc. etc. etc.
+                  words comment 3
+                </p>
               </div>
+              <p style="font-size: smaller; color: rgb(112, 112, 112)">
+                1 DAY AGO
+              </p>
+            </div>
+            <div class="comment_box">
+              <div>
+                <p>
+                  <i
+                    class="fa-regular fa-face-smile"
+                    style="font-size: large; padding: 1%"
+                  ></i>
+                </p>
+                <p style="color: rgb(112, 112, 112)">Add a comment...</p>
+              </div>
+              <p style="color: blue">Post</p>
             </div>
           </div>
           <div class="post">
             <div class="post_header">
-              <strong>[username]</strong>
-              <p>icon</p>
+              <h3>[username]</h3>
+              <h3>•••</h3>
             </div>
-            <img src="cat2.jpeg" alt="cat picture" />
+            <img src="cat2.jpeg" alt="cat photograph" />
             <div class="post_description">
               <div class="post_icons">
-                <p>[]</p>
-                <p>[]</p>
-                <p>[]</p>
-                <p>[]</p>
+                <p>
+                  <i class="fa-regular fa-heart"></i>
+                  <i class="fa-regular fa-comment"></i>
+                  <i class="fa-regular fa-paper-plane"></i>
+                </p>
+                <p><i class="fa-regular fa-bookmark"></i></p>
               </div>
               <strong> # likes</strong>
               <div class="comments">
-                <p>...</p>
+                <p>
+                  <strong>friend 1</strong> lorem ipsum et dolor etc. etc. etc.
+                  words comment one
+                </p>
+                <p>
+                  <strong>friend 5</strong> lorem ipsum et dolor etc. etc. etc.
+                  words comment two
+                </p>
+                <p>
+                  <strong>friend 3</strong> lorem ipsum et dolor etc. etc. etc.
+                  words comment 3
+                </p>
               </div>
+              <p style="font-size: smaller; color: rgb(112, 112, 112)">
+                1 DAY AGO
+              </p>
+            </div>
+            <div class="comment_box">
+              <div>
+                <p>
+                  <i
+                    class="fa-regular fa-face-smile"
+                    style="font-size: large; padding: 1%"
+                  ></i>
+                </p>
+                <p style="color: rgb(112, 112, 112)">Add a comment...</p>
+              </div>
+              <p style="color: blue">Post</p>
+            </div>
+          </div>
+
+          <div class="post">
+            <div class="post_header">
+              <h3>[username]</h3>
+              <h3>•••</h3>
+            </div>
+            <img src="cat3.jpeg" alt="cat photograph" />
+            <div class="post_description">
+              <div class="post_icons">
+                <p>
+                  <i class="fa-regular fa-heart"></i>
+                  <i class="fa-regular fa-comment"></i>
+                  <i class="fa-regular fa-paper-plane"></i>
+                </p>
+                <p><i class="fa-regular fa-bookmark"></i></p>
+              </div>
+              <strong> # likes</strong>
+              <div class="comments">
+                <p>
+                  <strong>friend 1</strong> lorem ipsum et dolor etc. etc. etc.
+                  words comment one
+                </p>
+                <p>
+                  <strong>friend 5</strong> lorem ipsum et dolor etc. etc. etc.
+                  words comment two
+                </p>
+                <p>
+                  <strong>friend 3</strong> lorem ipsum et dolor etc. etc. etc.
+                  words comment 3
+                </p>
+              </div>
+              <p style="font-size: smaller; color: rgb(112, 112, 112)">
+                1 DAY AGO
+              </p>
+            </div>
+            <div class="comment_box">
+              <div>
+                <p>
+                  <i
+                    class="fa-regular fa-face-smile"
+                    style="font-size: large; padding: 1%"
+                  ></i>
+                </p>
+                <p style="color: rgb(112, 112, 112)">Add a comment...</p>
+              </div>
+              <p style="color: blue">Post</p>
             </div>
           </div>
           <div class="post">
             <div class="post_header">
-              <strong>[username]</strong>
-              <p>icon</p>
+              <h3>[username]</h3>
+              <h3>•••</h3>
             </div>
-            <img src="cat3.jpeg" alt="cat picture" />
+            <img src="cat4.jpeg" alt="cat photograph" />
             <div class="post_description">
               <div class="post_icons">
-                <p>[]</p>
-                <p>[]</p>
-                <p>[]</p>
-                <p>[]</p>
+                <p>
+                  <i class="fa-regular fa-heart"></i>
+                  <i class="fa-regular fa-comment"></i>
+                  <i class="fa-regular fa-paper-plane"></i>
+                </p>
+                <p><i class="fa-regular fa-bookmark"></i></p>
               </div>
               <strong> # likes</strong>
               <div class="comments">
-                <p>...</p>
+                <p>
+                  <strong>friend 1</strong> lorem ipsum et dolor etc. etc. etc.
+                  words comment one
+                </p>
+                <p>
+                  <strong>friend 5</strong> lorem ipsum et dolor etc. etc. etc.
+                  words comment two
+                </p>
+                <p>
+                  <strong>friend 3</strong> lorem ipsum et dolor etc. etc. etc.
+                  words comment 3
+                </p>
               </div>
+              <p style="font-size: smaller; color: rgb(112, 112, 112)">
+                1 DAY AGO
+              </p>
             </div>
-          </div>
-          <div class="post">
-            <div class="post_header">
-              <strong>[username]</strong>
-              <p>icon</p>
-            </div>
-            <img src="cat4.jpeg" alt="cat picture" />
-            <div class="post_description">
-              <div class="post_icons">
-                <p>[]</p>
-                <p>[]</p>
-                <p>[]</p>
-                <p>[]</p>
+            <div class="comment_box">
+              <div>
+                <p>
+                  <i
+                    class="fa-regular fa-face-smile"
+                    style="font-size: large; padding: 1%"
+                  ></i>
+                </p>
+                <p style="color: rgb(112, 112, 112)">Add a comment...</p>
               </div>
-              <strong> # likes</strong>
-              <div class="comments">
-                <p>...</p>
-              </div>
+              <p style="color: blue">Post</p>
             </div>
           </div>
         </div>
