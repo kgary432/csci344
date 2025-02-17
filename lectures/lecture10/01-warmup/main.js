@@ -3,21 +3,33 @@ let canvasHeight = document.documentElement.clientHeight - 10;
 
 // in p5.js, the function runs on page load:
 function setup() {
-    rectMode(CENTER);
-    createCanvas(canvasWidth, canvasHeight);
+  rectMode(CENTER);
+  createCanvas(canvasWidth, canvasHeight);
 }
 
 // in p5.js, special event handler that listens for click events:
 function mouseClicked() {
-    // in p5.js, mouseX and mouseY are
-    // built-in global variabls that track the
-    // current position of your mouse.
-    circle(mouseX, mouseY, 100);
+  // in p5.js, mouseX and mouseY are
+  // built-in global variabls that track the
+  // current position of your mouse.
+  noFill();
+  circle(mouseX, mouseY, 100);
+  circle(mouseX, mouseY, 80);
+  circle(mouseX, mouseY, 60);
+  circle(mouseX, mouseY, 40);
+  circle(mouseX, mouseY, 20);
+  circle(mouseX, mouseY, 0);
 }
 
 // in p5.js, special event handler that listens for drag events:
 function mouseDragged() {
-    circle(mouseX, mouseY, 100);
+  noFill();
+  circle(mouseX, mouseY, 100);
+  circle(mouseX, mouseY, 80);
+  circle(mouseX, mouseY, 60);
+  circle(mouseX, mouseY, 40);
+  circle(mouseX, mouseY, 20);
+  circle(mouseX, mouseY, 0);
 }
 
 /**
