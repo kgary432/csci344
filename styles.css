@@ -87,6 +87,9 @@ img {
     grid-template-columns: 1fr;
   }
 }
+
+/*border ( broken :( )*/
+
 @keyframes sunsetGlow {
   0% {
     background-position: 0% 50%;
@@ -141,6 +144,6 @@ img {
   z-index: -1;
   border-radius: 15px;
   background: linear-gradient(90deg, #ff007f, #8000ff, #e60073);
-  background-size: 400% 400%;
+  background-size: 800% 200%;
   animation: sunsetGlow 6s ease-in-out infinite;
 }
