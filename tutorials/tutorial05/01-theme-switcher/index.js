@@ -19,3 +19,9 @@
     4. Use the cheatsheet associated with this tutorial to figure out how to adjust
        the class.
 */
+
+function changeClass(nameOfClass) {
+  // target body
+  const body = document.querySelector("body");
+  body.className = nameOfClass;
+}
