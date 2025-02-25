@@ -20,8 +20,7 @@
        the class.
 */
 
-function changeClass(nameOfClass) {
-  // target body
+function changeClass(className) {
   const body = document.querySelector("body");
-  body.className = nameOfClass;
+  body.className = className;
 }
