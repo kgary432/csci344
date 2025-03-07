@@ -207,40 +207,44 @@ console.log(tracks);
 // write your function below:
 const button = document.querySelector("button");
 const trackList = document.getElementById("track-list");
+let trackVisible = false;
 
 // Add event listener to button
-button.addEventListener("click", function () {
-  trackList.innerHTML = ""; // Clear previous entries
+button.addEventListener("click", () => {
+  if (trackVisible) {
+    trackList.innerHTML = "";
+  } else {
+    tracks.forEach((track) => {
+      // Create the card container
+      const card = document.createElement("div");
+      card.classList.add("track-card");
 
-  tracks.forEach((track) => {
-    // Create the card container
-    const card = document.createElement("div");
-    card.classList.add("track-card");
+      // Create and set album image
+      const img = document.createElement("img");
+      img.src = track.album.image_url;
+      img.alt = `${track.album.name} cover`;
 
-    // Create and set album image
-    const img = document.createElement("img");
-    img.src = track.album.image_url;
-    img.alt = `${track.album.name} cover`;
+      // Create track name element
+      const trackName = document.createElement("h3");
+      trackName.textContent = track.name;
 
-    // Create track name element
-    const trackName = document.createElement("h3");
-    trackName.textContent = track.name;
+      // Create artist name element
+      const artistName = document.createElement("p");
+      artistName.textContent = `Artist: ${track.artist.name}`;
 
-    // Create artist name element
-    const artistName = document.createElement("p");
-    artistName.textContent = `Artist: ${track.artist.name}`;
+      // Create album name element
+      const albumName = document.createElement("p");
+      albumName.textContent = `Album: ${track.album.name}`;
 
-    // Create album name element
-    const albumName = document.createElement("p");
-    albumName.textContent = `Album: ${track.album.name}`;
+      // Append elements to card
+      card.appendChild(img);
+      card.appendChild(trackName);
+      card.appendChild(artistName);
+      card.appendChild(albumName);
 
-    // Append elements to card
-    card.appendChild(img);
-    card.appendChild(trackName);
-    card.appendChild(artistName);
-    card.appendChild(albumName);
-
-    // Append card to track-list
-    trackList.appendChild(card);
-  });
+      // Append card to track-list
+      trackList.appendChild(card);
+    });
+    trackVisible = !trackVisible;
+  }
 });
