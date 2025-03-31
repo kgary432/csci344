@@ -573,12 +573,21 @@ video {
   margin-right: auto;
 }
 
+.my-4{
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
 .mt-24{
   margin-top: 6rem;
 }
 
 .flex{
   display: flex;
+}
+
+.contents{
+  display: contents;
 }
 
 .min-h-screen{
@@ -640,6 +649,11 @@ video {
 .text-2xl{
   font-size: 1.5rem;
   line-height: 2rem;
+}
+
+.text-xl{
+  font-size: 1.25rem;
+  line-height: 1.75rem;
 }
 
 .font-bold{

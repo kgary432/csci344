@@ -1,7 +1,7 @@
 import { getAccessToken } from "./utilities.js";
 const rootURL = "https://photo-app-secured.herokuapp.com";
 let token = null;
-let username = "webdev";
+let username = "kate";
 let password = "password";
 
 async function initializeScreen() {
@@ -10,6 +10,9 @@ async function initializeScreen() {
   showNav();
   // get posts:
   getPosts();
+  getProfile();
+  getSuggestions();
+  getStories();
 }
 
 function showNav() {
@@ -23,8 +26,103 @@ function showNav() {
         </nav>
     `;
 }
-
 // implement remaining functionality below:
+
+//await / async syntax:
+async function getStories() {
+  const response = await fetch(
+    "https://photo-app-secured.herokuapp.com/api/stories/",
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+  const data = await response.json();
+  console.log(data);
+  renderStories(data);
+}
+
+function renderStory(storyJSON) {
+  const template = `
+        <div class="flex flex-col justify-center items-center">
+          <img src="${storyJSON.user.image_url}" class="rounded-full border-4 border-gray-300" />
+          <p class="text-xs text-gray-500">${storyJSON.user.username}</p>
+        </div>
+    `;
+  const container = document.querySelector("main header");
+  container.insertAdjacentHTML("beforeend", template);
+}
+
+function renderStories(storiesJSON) {
+  storiesJSON.forEach(renderStory);
+}
+
+//await / async syntax:
+async function getProfile() {
+  const response = await fetch(
+    "https://photo-app-secured.herokuapp.com/api/profile/",
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+  const data = await response.json();
+  console.log(data);
+  renderProfile(data);
+}
+
+function renderProfile(profileJSON) {
+  const template = `    
+  <header class="flex gap-4 items-center">
+      <img src="${profileJSON.thumb_url}" class="rounded-full w-16" />
+      <h2 class="font-Comfortaa font-bold text-2xl">${profileJSON.username}</h2>
+    </header>
+  `;
+  const container = document.querySelector("aside");
+  container.insertAdjacentHTML("afterbegin", template);
+}
+
+//await / async syntax:
+async function getSuggestions() {
+  const response = await fetch(
+    "https://photo-app-secured.herokuapp.com/api/suggestions/",
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+  const data = await response.json();
+  console.log(data);
+  renderSuggestions(data);
+}
+
+function renderSuggestion(suggestionJSON) {
+  const template = ` <section class="flex justify-between items-center mb-4 gap-2">
+        <img src="${suggestionJSON.image_url}" class="rounded-full w-16" />
+        <div class="w-[180px]">
+          <p class="font-bold text-sm">${suggestionJSON.username}</p>
+          <p class="text-gray-500 text-xs">suggested for you</p>
+        </div>
+        <button class="text-blue-500 text-sm py-2">follow</button>
+      </section>
+    `;
+  const container = document.querySelector("aside");
+  container.insertAdjacentHTML("beforeend", template);
+}
+
+function renderSuggestions(suggestionsJSON) {
+  suggestionsJSON.forEach(renderSuggestion);
+}
+
 //await / async syntax:
 async function getPosts() {
   const response = await fetch(
@@ -40,24 +138,6 @@ async function getPosts() {
   const data = await response.json();
   console.log(data);
   renderPosts(data);
-}
-
-function renderBookmarkButton(postJSON) {
-  let template = "";
-  if (postJSON.current_user_bookmark_id) {
-    template = `
-            <button onclick="">
-                <i class="fas fa-bookmark"></i>
-            </button>
-        `;
-  } else {
-    template = `
-            <button onclick="window.createBookmark(${postJSON.id})">
-                <i class="far fa-bookmark"></i>
-            </button>
-        `;
-  }
-  return template;
 }
 
 function renderPost(postJSON) {
@@ -119,6 +199,25 @@ function renderPosts(postListJSON) {
   postListJSON.forEach(renderPost);
 }
 
+function renderBookmarkButton(postJSON) {
+  let template = "";
+  if (postJSON.current_user_bookmark_id) {
+    template = `
+          <button onclick="window.deleteBookmark(${postJSON.current_user_bookmark_id}, ${postJSON.id})">
+              <i class="fas fa-bookmark"></i>
+          </button>
+      `;
+  } else {
+    template = `
+          <button onclick="window.createBookmark(${postJSON.id})">
+              <i class="far fa-bookmark"></i>
+          </button>
+      `;
+  }
+  return template;
+}
+
+//await / async syntax:
 //await / async syntax:
 window.createBookmark = async function (postId) {
   const postData = {
@@ -137,6 +236,81 @@ window.createBookmark = async function (postId) {
   );
   const data = await response.json();
   console.log(data);
+};
+
+window.deleteBookmark = async function (bookmarkId) {
+  //in theory this should work but currently it returns a bunch of big red errors
+  const response = await fetch(
+    `https://photo-app-secured.herokuapp.com/api/bookmarks/${bookmarkId}/`,
+    {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+  if (response.ok) {
+    console.log(`Bookmark ${bookmarkId} deleted successfully`);
+  } else {
+    console.error(`Failed to delete bookmark ${bookmarkId}`);
+  }
+};
+
+function renderLikeButton(postJSON) {
+  let template = "";
+  if (postJSON.current_user_like_id) {
+    template = `
+            <button onclick="window.deleteLike(${postJSON.current_user_like_id})">
+                <i class="fas fa-heart"></i>
+            </button>
+        `;
+  } else {
+    template = `
+            <button onclick="window.createLike(${postJSON.id})">
+                <i class="far fa-heart"></i>
+            </button>
+        `;
+  }
+  return template;
+}
+
+//await / async syntax:
+window.createLike = async function (postId) {
+  const postData = {
+    post_id: postId,
+  };
+  const response = await fetch(
+    "https://photo-app-secured.herokuapp.com/api/likes/",
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(postData),
+    }
+  );
+  const data = await response.json();
+  console.log(data);
+};
+
+window.deleteLike = async function (likeId) {
+  const response = await fetch(
+    `https://photo-app-secured.herokuapp.com/api/likes/${likeId}/`,
+    {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+  if (response.ok) {
+    console.log(`Like ${likeId} deleted successfully`);
+  } else {
+    console.error(`Failed to delete like ${likeId}`);
+  }
 };
 
 // after all of the functions are defined, invoke initialize at the bottom:
