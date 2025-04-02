@@ -48,7 +48,7 @@ async function getStories() {
 function renderStory(storyJSON) {
   const template = `
         <div class="flex flex-col justify-center items-center">
-          <img src="${storyJSON.user.image_url}" class="rounded-full border-4 border-gray-300" />
+          <img src="${storyJSON.user.thumb_url}" class="rounded-full border-4 border-gray-300" />
           <p class="text-xs text-gray-500">${storyJSON.user.username}</p>
         </div>
     `;
@@ -107,7 +107,7 @@ async function getSuggestions() {
 
 function renderSuggestion(suggestionJSON) {
   const template = ` <section class="flex justify-between items-center mb-4 gap-2">
-        <img src="${suggestionJSON.image_url}" class="rounded-full w-16" />
+        <img src="${suggestionJSON.thumb_image_url}" class="rounded-full w-16" />
         <div class="w-[180px]">
           <p class="font-bold text-sm">${suggestionJSON.username}</p>
           <p class="text-gray-500 text-xs">suggested for you</p>
