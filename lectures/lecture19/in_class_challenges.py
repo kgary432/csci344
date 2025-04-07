@@ -32,8 +32,30 @@ posts = [post1, post2, post3, post4, post5, post6, post7, post8, post9, post10]
 ################################
 # For each of the tasks below, write a function that performs the requested operation:
 # 1. Prints a dictionary representation of each user to the console.
+
+def print_dictionary_of_user():
+    for user in users:
+        print(user.to_dict)
+
 # 2. Returns a list of usernames (list of string)
+def print_usernames():
+    for user in users:
+        return user.username
+    
+
+
 # 3. Returns a list of active users (list of User objects)
+
+def get_active_users(users):
+    active_users = []
+    for user in users:
+        if user.is_active:
+            active_users.append(user)
+    return active_users
+
+print(get_active_users(user1))
+
+
 # 4. Prints a dictionary representation of the first 3 users
 # 5. Returns a list of image_urls of the posts (list of strings)
 
