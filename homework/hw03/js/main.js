@@ -80,7 +80,7 @@ async function getProfile() {
 function renderProfile(profileJSON) {
   const template = `    
   <header class="flex gap-4 items-center">
-      <img src="${profileJSON.image_url}" alt="${profileJSON.username}'s profile picture" class="rounded-full w-16" />
+      <img src="${profileJSON.thumb_url}" alt="${profileJSON.username}'s profile picture" class="rounded-full w-16" />
       <h2 class="font-Comfortaa font-bold text-2xl">${profileJSON.username}</h2>
     </header>
   `;
