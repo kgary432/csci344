@@ -53,7 +53,7 @@ def get_active_users(users):
             active_users.append(user)
     return active_users
 
-print(get_active_users(user1))
+print(get_active_users([user1, user4]))
 
 
 # 4. Prints a dictionary representation of the first 3 users
