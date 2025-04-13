@@ -38,6 +38,7 @@ def home():
                 <li>Exercise 6: <a href="/ui/all-restaurants/?location=Asheville+NC&term=thai">/ui/all-restaurants/?location=Asheville+NC&term=thai</a> (5pts Extra Credit)</li>
             </ul>
         </body>
+        </html>
         '''
 
 ##############################
@@ -45,7 +46,7 @@ def home():
 ##############################
 @app.route('/message')
 def exercise1():
-    return 'Hello world!'
+    return f"Hello {current_user["first_name"]} {current_user["last_name"]}!"
 
 
 ###########################################
@@ -57,8 +58,7 @@ def exercise2():
     import json
     with open('data.json') as f:
         data = json.load(f)
-    print(data)
-    return json.dumps({})
+    return(data)
     
 
 
@@ -76,12 +76,18 @@ can make use of query string request parameters:
 
 e.g., http://127.0.0.1:5000/yelp-proxy/location=NY,%20NY&term=chinese&count=3
 '''
-@app.route('/data/yelp/')
 @app.route('/data/yelp')
+@app.route('/data/yelp/')
 def exercise3():
-    search_term = 'pizza'
-    location = 'Asheville, NC'
+    search_term = request.args.get('term')
+    location = request.args.get('location')
     count = 10
+    #check input data
+    if search_term is None:
+        return "Error, no search term provided."
+    if location is None:
+        return "Error, no location provided."
+
     # go fetch data from another server and give it to the requestor:
     base_url = 'https://www.apitutor.org/yelp/simple/v3/businesses/search'
     url = f'{base_url}?location={location}&term={search_term}&limit={count}'
@@ -102,7 +108,8 @@ def exercise4():
     print(quotes)
     return render_template(
         'quote-of-the-day.html',
-        user=current_user
+        user=current_user ,
+        random_quote = random.choice(quotes)       
     )
 
 
