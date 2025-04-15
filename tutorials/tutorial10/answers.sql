@@ -10,7 +10,9 @@ FROM users;
 
 
 -- Exercise 3: Sorting
-
+SELECT id, first_name, last_name 
+FROM users;
+GROUP BY last_name
 
 
 
