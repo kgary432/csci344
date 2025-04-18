@@ -31,9 +31,9 @@ GROUPBY user_id
 COUNT(*);
 
 -- Exercise 8: Joining: two tables
-SELECT id, image_url, user_id FROM posts
-JOIN users ON user_id = id
-WHERE (id = 26) or (id = 12);
+SELECT posts.id, posts.image_url, user_id FROM posts
+JOIN users ON user_id = posts.id
+WHERE (posts.id = 26) or (posts.id = 12);
 
 -- Exercise 9: More joining practice: two tables
 SELECT posts.id, posts.pub_date FROM posts
