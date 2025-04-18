@@ -13,7 +13,7 @@ from datetime import datetime
 @with_app_context
 def get_all_posts():
     # get all of the posts:
-    posts = Post.query.all()
+    posts = Post.query.filter_by(user_id = 18).all()
     return posts
 
 
