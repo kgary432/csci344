@@ -19,9 +19,34 @@ class PostListEndpoint(Resource):
 
     def get(self):
 
+        '''
+        Return the first 20 posts in the user's feed. if the user specifies a limit, honor it
+        unless it's above 50, then return an error to prevent DNS attacks.
+        '''
+    
+        count = request.args.get("limit");
+
+        if count is None:
+            count = 20;
+        
+        try:
+            count = int(count);
+        except:
+            return Response(json.dumps( 
+                {"message": "Limit must be an integer"}), 
+                mimetype="application/json", status=400)
+        if count > 50:
+            return Response(json.dumps( 
+                {"message": "Limit limit is 50"}), 
+                mimetype="application/json", status=400)
+
+
+
         # giving you the beginnings of this code (as this one is a little tricky for beginners):
         ids_for_me_and_my_friends = get_authorized_user_ids(self.current_user)
-        posts = Post.query.filter(Post.user_id.in_(ids_for_me_and_my_friends))
+        posts = (Post.query
+                 .filter(Post.user_id.in_(ids_for_me_and_my_friends))
+                 .limit(count))
 
         # TODO: add the ability to handle the "limit" query parameter:
 
@@ -30,6 +55,18 @@ class PostListEndpoint(Resource):
 
     def post(self):
         # TODO: handle POST logic
+        #capture data sent from the user and verify the data, throw error if needed
+
+        image_url = request.args.get('image_url');
+
+        #optional
+        caption = request.args.get('caption');
+        alt_text = request.args.get('alt_text');
+
+        if image_url is None:
+            return Response(json.dumps({"message": "Bad user! Bad! Image url is required."}), mimetype="application/json", status=400)
+
+
         return Response(json.dumps({}), mimetype="application/json", status=201)
 
 
