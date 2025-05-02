@@ -29,14 +29,14 @@ if __name__ == "__main__":
 ###################
 # Note: to run on command line (from the tests directory):
 # poetry run python run_tests.py -v
-# poetry run python run_tests.py TestPostListEndpoint -v
-# poetry run python run_tests.py TestPostDetailEndpoint -v
-# poetry run python run_tests.py TestBookmarkDetailEndpoint -v
-# poetry run python run_tests.py TestBookmarkListEndpoint -v
+# poetry run python run_tests.py TestPostListEndpoint -v        PASSED!
+# poetry run python run_tests.py TestPostDetailEndpoint -v      PASSED!
+# poetry run python run_tests.py TestBookmarkDetailEndpoint -v  PASSED!
+# poetry run python run_tests.py TestBookmarkListEndpoint -v    PASSED! 
 # poetry run python run_tests.py TestLikePostDetailEndpoint -v
 # poetry run python run_tests.py TestLikePostListEndpoint -v
-# poetry run python run_tests.py TestProfileEndpoint -v
-# poetry run python run_tests.py TestStoryListEndpoint -v
+# poetry run python run_tests.py TestProfileEndpoint -v         PASSED!
+# poetry run python run_tests.py TestStoryListEndpoint -v       PASSED!
 
 
 #######################
