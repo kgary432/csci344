@@ -26,6 +26,7 @@ api = Api(app)
 
 
 # order matters here (needs to come after DB init line)
+# Makes the person logged in who we want
 with app.app_context():
     current_user = User.query.filter_by(id=12).one()
 
