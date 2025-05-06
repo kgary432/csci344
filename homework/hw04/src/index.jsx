@@ -4,12 +4,12 @@ import { getAccessToken } from "./server-requests.jsx";
 import App from "./components/App.jsx";
 
 async function main() {
-    // this script kicks off the React App:
-    const username = "webdev";
-    const token = await getAccessToken(username, "password");
-    const rootEl = document.getElementById("app");
-    const root = createRoot(rootEl);
-    root.render(<App token={token} username={username} />);
+  // this script kicks off the React App:
+  const username = "josie";
+  const token = await getAccessToken(username, "password");
+  const rootEl = document.getElementById("app");
+  const root = createRoot(rootEl);
+  root.render(<App token={token} username={username} />);
 }
 
 main();
