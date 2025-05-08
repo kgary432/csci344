@@ -1,8 +1,5 @@
+from models import db, Following, Post
 from sqlalchemy import and_
-
-from models import db
-from models.following import Following
-from models.post import Post
 
 """
 Below are some helper functions to help you with security:
@@ -34,16 +31,11 @@ def can_view_post(post_id, user):
     post = Post.query.filter(
         and_(Post.id == post_id, Post.user_id.in_(auth_users_ids))
     ).first()
+    print(Post.query.filter(
+        and_(Post.id == post_id, Post.user_id.in_(auth_users_ids))
+    ))
     if post:
-        print(
-            post_id,
-            "post=",
-            post.id,
-            "user=",
-            user.id,
-            "posts_user_id=",
-            post.user_id,
-        )
+        print(post_id, "post=", post.id, "user=", user.id, "posts_user_id=", post.user_id)
     if not post:
         print("CANNOT VIEW!!!")
         return False
@@ -51,15 +43,17 @@ def can_view_post(post_id, user):
 
 
 def initialize_routes(api, current_user):
-    from views.bookmarks import initialize_routes as init_bookmark_routes
-    from views.comments import initialize_routes as init_comment_routes
-    from views.followers import initialize_routes as init_follower_routes
-    from views.following import initialize_routes as init_following_routes
-    from views.post_likes import initialize_routes as init_post_like_routes
-    from views.posts import initialize_routes as init_post_routes
-    from views.profile import initialize_routes as init_profile_routes
-    from views.stories import initialize_routes as init_story_routes
-    from views.suggestions import initialize_routes as init_suggestion_routes
+    from .bookmarks import initialize_routes as init_bookmark_routes
+    from .comments import initialize_routes as init_comment_routes
+    from .followers import initialize_routes as init_follower_routes
+    from .following import initialize_routes as init_following_routes
+    from .posts import initialize_routes as init_post_routes
+    from .post_likes import initialize_routes as init_post_like_routes
+    from .profile import initialize_routes as init_profile_routes
+    from .stories import initialize_routes as init_story_routes
+    from .suggestions import initialize_routes as init_suggestion_routes
+    from .authentication import initialize_routes as init_authentication_routes
+    from .token import initialize_routes as init_token_routes
 
     init_bookmark_routes(api, current_user)
     init_comment_routes(api, current_user)
@@ -70,3 +64,5 @@ def initialize_routes(api, current_user):
     init_profile_routes(api, current_user)
     init_story_routes(api, current_user)
     init_suggestion_routes(api, current_user)
+    init_authentication_routes(api.app)
+    init_token_routes(api)

@@ -1,22 +1,22 @@
 import json
-
-from sqlalchemy import text
-
-from models import db
-from models.bookmark import Bookmark
-from models.comment import Comment
-from models.following import Following
-from models.like_post import LikePost
-from models.post import Post
+from models import Post, Comment, Bookmark, Following, db, LikePost
 from views import get_authorized_user_ids
+import flask_jwt_extended
+from sqlalchemy import text
 
 
 class ApiNavigator(object):
     def __init__(self, current_user):
         self.current_user = current_user
-        post = Post.query.filter_by(user_id=self.current_user.id).limit(1).one_or_none()
+        post = (
+            Post.query.filter_by(user_id=self.current_user.id)
+            .limit(1)
+            .one_or_none()
+        )
         comment = (
-            Comment.query.filter_by(user_id=self.current_user.id).limit(1).one_or_none()
+            Comment.query.filter_by(user_id=self.current_user.id)
+            .limit(1)
+            .one_or_none()
         )
         following = (
             Following.query.filter_by(user_id=self.current_user.id)
@@ -114,15 +114,21 @@ class ApiNavigator(object):
                     "endpoint": "/api/posts/",
                     "endpoint_example": "/api/posts/?limit=3",
                     "method": "GET",
-                    "request_description": "Retrieves a list of posts that the current user can access. This includes posts created by the current user, as well as posts of users that the current user is following.",
-                    "response_description": "List of post objects that are accessible to the current user.",
+                    "request_description": (
+                        "Retrieves a list of posts that the current user can access. This includes posts created by the current user, as well as posts of users that the current user is following."
+                    ),
+                    "response_description": (
+                        "List of post objects that are accessible to the current user."
+                    ),
                     "response_type": "List<Post>",
                     "parameters": [
                         {
                             "name": "limit",
                             "data_type": "int",
                             "optional_or_required": "optional",
-                            "description": "Limits the number of posts returned (defaults to 10, maximum is 50).",
+                            "description": (
+                                "Limits the number of posts returned (defaults to 10, maximum is 50)."
+                            ),
                         }
                     ],
                 },
@@ -132,7 +138,9 @@ class ApiNavigator(object):
                     "endpoint": "/api/posts/<id>",
                     "endpoint_example": "/api/posts/{0}".format(self.post_id),
                     "method": "GET",
-                    "request_description": "Retrieves the post matching the id from the URL request.",
+                    "request_description": (
+                        "Retrieves the post matching the id from the URL request."
+                    ),
                     "response_description": "Post object requested.",
                     "response_type": "Post",
                     "parameters": [],
@@ -143,34 +151,46 @@ class ApiNavigator(object):
                     "endpoint": "/api/posts/",
                     "endpoint_example": "/api/posts/",
                     "method": "POST",
-                    "request_description": "Creates a new post from the data that you send via the request body.",
-                    "response_description": "The Post object you just created.",
+                    "request_description": (
+                        "Creates a new post from the data that you send via the request body."
+                    ),
+                    "response_description": (
+                        "The Post object you just created."
+                    ),
                     "response_type": "Post",
                     "parameters": [
                         {
                             "name": "image_url",
                             "data_type": "string",
                             "optional_or_required": "required",
-                            "description": "A URL path to the image you want to post.",
+                            "description": (
+                                "A URL path to the image you want to post."
+                            ),
                         },
                         {
                             "name": "caption",
                             "data_type": "string",
                             "optional_or_required": "optional",
-                            "description": "A message that you want to associate with your post.",
+                            "description": (
+                                "A message that you want to associate with your post."
+                            ),
                         },
                         {
                             "name": "alt_text",
                             "data_type": "string",
                             "optional_or_required": "optional",
-                            "description": "A description of the image you posted.",
+                            "description": (
+                                "A description of the image you posted."
+                            ),
                         },
                     ],
                     "sample_body": json.dumps(
                         {
                             "image_url": self.image_url,
                             "caption": "Pretty landscape",
-                            "alt_text": "The photo shows a picture of a canyon taken in Sedona, AZ",
+                            "alt_text": (
+                                "The photo shows a picture of a canyon taken in Sedona, AZ"
+                            ),
                         },
                         indent=4,
                     ),
@@ -181,27 +201,37 @@ class ApiNavigator(object):
                     "endpoint": "/api/posts/<id>",
                     "endpoint_example": "/api/posts/{0}".format(self.post_id),
                     "method": "PATCH",
-                    "request_description": "Updates the post from the data you send via the request body.",
-                    "response_description": "The Post object you just updated.",
+                    "request_description": (
+                        "Updates the post from the data you send via the request body."
+                    ),
+                    "response_description": (
+                        "The Post object you just updated."
+                    ),
                     "response_type": "Post",
                     "parameters": [
                         {
                             "name": "image_url",
                             "data_type": "string",
                             "optional_or_required": "optional",
-                            "description": "A URL path to the image you want to post.",
+                            "description": (
+                                "A URL path to the image you want to post."
+                            ),
                         },
                         {
                             "name": "caption",
                             "data_type": "string",
                             "optional_or_required": "optional",
-                            "description": "A message that you want to associate with your post.",
+                            "description": (
+                                "A message that you want to associate with your post."
+                            ),
                         },
                         {
                             "name": "alt_text",
                             "data_type": "string",
                             "optional_or_required": "optional",
-                            "description": "A description of the image you posted.",
+                            "description": (
+                                "A description of the image you posted."
+                            ),
                         },
                     ],
                     "sample_body": json.dumps(
@@ -220,7 +250,9 @@ class ApiNavigator(object):
                     "endpoint_example": "/api/posts/{0}".format(self.post_id),
                     "method": "DELETE",
                     "request_description": "Deletes the specified post.",
-                    "response_description": "A success message indicating that the post has been deleted.",
+                    "response_description": (
+                        "A success message indicating that the post has been deleted."
+                    ),
                     "response_type": "Message",
                     "parameters": [],
                 },
@@ -240,7 +272,9 @@ class ApiNavigator(object):
                             "name": "post_id",
                             "data_type": "int",
                             "optional_or_required": "required",
-                            "description": "The id of the Post that the comment references.",
+                            "description": (
+                                "The id of the Post that the comment references."
+                            ),
                         },
                         {
                             "name": "text",
@@ -261,10 +295,14 @@ class ApiNavigator(object):
                     "id": "comment-delete",
                     "name": "Delete Comment",
                     "endpoint": "/api/comments/<id>",
-                    "endpoint_example": "/api/comments/{0}".format(self.comment_id),
+                    "endpoint_example": "/api/comments/{0}".format(
+                        self.comment_id
+                    ),
                     "method": "DELETE",
                     "request_description": "Deletes a comment",
-                    "response_description": "Message indicating whether or not the delete was successful.",
+                    "response_description": (
+                        "Message indicating whether or not the delete was successful."
+                    ),
                     "response_type": "Message",
                     "parameters": [],
                 },
@@ -276,7 +314,9 @@ class ApiNavigator(object):
                     "endpoint": "/api/followers/",
                     "endpoint_example": "/api/followers/",
                     "method": "GET",
-                    "request_description": "Retrieves all of the users who are following you.",
+                    "request_description": (
+                        "Retrieves all of the users who are following you."
+                    ),
                     "response_description": "A list of your followers",
                     "response_type": "List<Follower>",
                     "parameters": [],
@@ -289,8 +329,12 @@ class ApiNavigator(object):
                     "endpoint": "/api/following/",
                     "endpoint_example": "/api/following/",
                     "method": "GET",
-                    "request_description": "Retrieves all of the users who you follow.",
-                    "response_description": "A list of users you are following.",
+                    "request_description": (
+                        "Retrieves all of the users who you follow."
+                    ),
+                    "response_description": (
+                        "A list of users you are following."
+                    ),
                     "response_type": "List<Following>",
                     "parameters": [],
                 },
@@ -308,7 +352,9 @@ class ApiNavigator(object):
                             "name": "user_id",
                             "data_type": "int",
                             "optional_or_required": "required",
-                            "description": "The id of the User that you would like to follow.",
+                            "description": (
+                                "The id of the User that you would like to follow."
+                            ),
                         }
                     ],
                     "sample_body": json.dumps(
@@ -319,7 +365,9 @@ class ApiNavigator(object):
                     "id": "following-delete",
                     "name": "Unfollow User",
                     "endpoint": "/api/following/<id>",
-                    "endpoint_example": "/api/following/{0}".format(self.following_id),
+                    "endpoint_example": "/api/following/{0}".format(
+                        self.following_id
+                    ),
                     "method": "DELETE",
                     "request_description": "Deletes a following instance.",
                     "response_description": "Message.",
@@ -346,7 +394,9 @@ class ApiNavigator(object):
                     "endpoint": "/api/suggestions/",
                     "endpoint_example": "/api/suggestions/",
                     "method": "GET",
-                    "request_description": "Retrieves list of suggested user accounts that you may be interested in following.",
+                    "request_description": (
+                        "Retrieves list of suggested user accounts that you may be interested in following."
+                    ),
                     "response_description": "List of user accounts.",
                     "response_type": "List<User>",
                     "parameters": [],
@@ -359,7 +409,9 @@ class ApiNavigator(object):
                     "endpoint": "/api/stories/",
                     "endpoint_example": "/api/stories/",
                     "method": "GET",
-                    "request_description": "Retrieves a list of stories posted by people in your network.",
+                    "request_description": (
+                        "Retrieves a list of stories posted by people in your network."
+                    ),
                     "response_description": "List of stories.",
                     "response_type": "List<Story>",
                     "parameters": [],
@@ -372,7 +424,9 @@ class ApiNavigator(object):
                     "endpoint": "/api/bookmarks/",
                     "endpoint_example": "/api/bookmarks/",
                     "method": "GET",
-                    "request_description": "Retrieves a list of posts you have bookmarked.",
+                    "request_description": (
+                        "Retrieves a list of posts you have bookmarked."
+                    ),
                     "response_description": "List of bookmarks.",
                     "response_type": "List<Bookmark>",
                     "parameters": [],
@@ -391,7 +445,9 @@ class ApiNavigator(object):
                             "name": "post_id",
                             "data_type": "int",
                             "optional_or_required": "required",
-                            "description": "The id of the Post that you would like to bookmark.",
+                            "description": (
+                                "The id of the Post that you would like to bookmark."
+                            ),
                         }
                     ],
                     "sample_body": json.dumps(
@@ -402,10 +458,14 @@ class ApiNavigator(object):
                     "id": "bookmarks-delete",
                     "name": "Remove Bookmark",
                     "endpoint": "/api/bookmarks/<id>",
-                    "endpoint_example": "/api/bookmarks/{0}".format(self.bookmark_id),
+                    "endpoint_example": "/api/bookmarks/{0}".format(
+                        self.bookmark_id
+                    ),
                     "method": "DELETE",
                     "request_description": "Remove a bookmark.",
-                    "response_description": "Message indicating whether or not the Bookmark was successfully removed.",
+                    "response_description": (
+                        "Message indicating whether or not the Bookmark was successfully removed."
+                    ),
                     "response_type": "Message",
                 },
             ],
@@ -416,7 +476,9 @@ class ApiNavigator(object):
                     "endpoint": "/api/likes/",
                     "endpoint_example": "/api/likes/",
                     "method": "POST",
-                    "request_description": "Ensure that the post id of the Post that you want to like is included in the endpoint url (see example below).",
+                    "request_description": (
+                        "Ensure that the post id of the Post that you want to like is included in the endpoint url (see example below)."
+                    ),
                     "response_description": "The Like object.",
                     "response_type": "List",
                     "sample_body": json.dumps(
@@ -427,10 +489,14 @@ class ApiNavigator(object):
                     "id": "likes-delete",
                     "name": "Remove a Like",
                     "endpoint": "/api/likes/<id>",
-                    "endpoint_example": "/api/likes/{id}".format(id=self.like_id),
+                    "endpoint_example": "/api/likes/{id}".format(
+                        id=self.like_id
+                    ),
                     "method": "DELETE",
                     "request_description": "Ask to remove a like.",
-                    "response_description": "A message indicating whether or not the Like was successfully removed/",
+                    "response_description": (
+                        "A message indicating whether or not the Like was successfully removed/"
+                    ),
                     "response_type": "Message",
                 },
             ],
@@ -443,7 +509,9 @@ class ApiNavigator(object):
                         post_id=self.unliked_post_id
                     ),
                     "method": "POST",
-                    "request_description": "Issues an access and refresh token based on the credentials passed to the API Endpoint",
+                    "request_description": (
+                        "Issues an access and refresh token based on the credentials passed to the API Endpoint"
+                    ),
                     "response_description": "Access and Refresh Token.",
                     "response_type": "Message",
                     "parameters": [
@@ -451,13 +519,17 @@ class ApiNavigator(object):
                             "name": "username",
                             "data_type": "string",
                             "optional_or_required": "required",
-                            "description": "The username of the person logging in.",
+                            "description": (
+                                "The username of the person logging in."
+                            ),
                         },
                         {
                             "name": "password",
                             "data_type": "string",
                             "optional_or_required": "required",
-                            "description": "The password of the person logging in.",
+                            "description": (
+                                "The password of the person logging in."
+                            ),
                         },
                     ],
                     "sample_body": json.dumps(
@@ -475,17 +547,29 @@ class ApiNavigator(object):
                     "endpoint_example": "/api/token/refresh/",
                     "method": "POST",
                     "request_description": "Issues new access token.",
-                    "response_description": "A response that returns a new access token",
+                    "response_description": (
+                        "A response that returns a new access token"
+                    ),
                     "response_type": "Message",
                     "parameters": [
                         {
                             "name": "refresh_token",
                             "data_type": "string",
                             "optional_or_required": "required",
-                            "description": "The refresh token that was previously issued to the user from the /api/token endpoint.",
+                            "description": (
+                                "The refresh token that was previously issued to the user from the /api/token endpoint."
+                            ),
                         }
                     ],
-                    "sample_body": json.dumps({"refresh_token": "DUMMY"}),
+                    "sample_body": json.dumps(
+                        {
+                            "refresh_token": (
+                                flask_jwt_extended.create_refresh_token(
+                                    self.current_user.id
+                                )
+                            )
+                        }
+                    ),
                 },
             ],
         }
